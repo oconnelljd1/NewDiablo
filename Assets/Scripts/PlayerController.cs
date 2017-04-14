@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
 					//Debug.Log ("hit " + hit.collider.gameObject.tag);
 					if (hit.collider.gameObject.tag == "Ground") {
 						targetPos = hit.point;
-					} else if (hit.collider.tag == "Enemy" || hit.collider.tag == "Item" || hit.collider.tag == "Chest") {
+					} else if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Item") || hit.collider.CompareTag("Chest")||hit.collider.CompareTag("NPC")) {
 						targetObject = hit.collider.gameObject;
 						targetPos = targetObject.transform.position;
 						targetNode = pathfinder.NodeFormWolrdPoint (targetPos);
@@ -101,23 +101,28 @@ public class PlayerController : MonoBehaviour {
 		if (targetObject) {
 			Displacement = targetPos - transform.position;
 			Displacement.y = 0;
-			if (targetObject.tag == "Enemy") {
+			if (targetObject.CompareTag("Enemy")) {
 				if (Displacement.sqrMagnitude < 1 + WeaponManager.instance.GetNextWeaponSqrRange ()) {
 					WeaponManager.instance.TryAttack ();
 					return;
 				}
-			} else if (targetObject.tag == "Item") {
+			} else if (targetObject.CompareTag("Item")) {
 				if (Displacement.sqrMagnitude < 0.7f) {
 					ItemManager.instance.AddItemToInventory (targetObject.GetComponentInParent<ItemController> ());
 					here = true;
 					return;
 				}
-			} else if (targetObject.tag == "Chest"){
+			} else if (targetObject.CompareTag("Chest")){
 				//Debug.Log (Displacement.sqrMagnitude);
 				if(Displacement.sqrMagnitude < 1.25){
 					//Debug.Log ("FoundChest");
 					targetObject.GetComponent<ChestController> ().Open ();
 					here = true;
+					return;
+				}
+			}else if (targetObject.CompareTag("NPC")){
+				if(Displacement.sqrMagnitude < 1.25f){
+					here = true; 
 					return;
 				}
 			}
