@@ -6,7 +6,7 @@ public class QuestManager : MonoBehaviour {
 
 	public static QuestManager instance;
 
-	private bool[] openQuests = new bool[5], completedQuests = new bool[5];
+	private bool[] openQuests, completedQuests;
 	[SerializeField]private string[] questsListeners;
 	private int[] questStages;
 	[SerializeField]private int[] questMaximums;
@@ -22,7 +22,10 @@ public class QuestManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		openQuests = new bool[questsListeners.Length];
+		completedQuests = new bool[questsListeners.Length];
+
+		openQuests [0] = true;
 	}
 	
 	// Update is called once per frame
@@ -31,16 +34,34 @@ public class QuestManager : MonoBehaviour {
 	}
 
 	public void IncrementQuest(string _quest){
-		int quest = 0;
 		for(int i = 0; i < questsListeners.Length; i ++){
-			if(questsListeners[i] == _quest){
-				quest = i;
+			if (questsListeners [i] == _quest) {
+				if (openQuests [i]) {
+					questStages [i]++;
+					if (questStages [i] == questMaximums [i]) {
+						openQuests [i] = false;
+						completedQuests [i] = true;
+					}
+					break;
+				}
 			}
-		}
-			if (openQuests [quest]) {
-			questStages [quest]++;
 		}
 	}
 
+	public bool[] GetOpenQuests(){
+		return openQuests;
+	}
+
+	public bool[] GetCompletedQuests(){
+		return completedQuests;
+	}
+
+	public void CloseOpenQuest(int _index){
+		openQuests [_index] = false;
+	}
+
+	public void OpenQuest(int _index){
+		openQuests [_index] = true;
+	}
 
 }

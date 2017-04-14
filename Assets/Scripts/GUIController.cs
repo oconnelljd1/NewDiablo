@@ -29,8 +29,10 @@ public class GUIController : MonoBehaviour {
 		}
 		PotionController[] equippedPotions = PotionManager.instance.GetEquippedPotions ();
 		for(int i = 0; i < potions.Length; i++){
-			if(equippedPotions[i] != null){
+			if (equippedPotions [i] != null) {
 				potions [i].sprite = equippedPotions [i].GetComponent<ItemController> ().GetSprite ();
+			} else {
+				potions [i].sprite = null;
 			}
 		}
 
