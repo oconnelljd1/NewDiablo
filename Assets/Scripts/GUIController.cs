@@ -20,6 +20,7 @@ public class GUIController : MonoBehaviour {
 		WeaponController[] equippedWeapons = WeaponManager.instance.GetEquippedWeapons();
 		for(int i = 0; i < equippedWeapons.Length; i++){
 			if(equippedWeapons[i] != null){
+				//Debug.Log (weapons [i]);
 				weapons [i].sprite = equippedWeapons[i].GetSprite ();
 			}
 		}

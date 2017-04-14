@@ -37,7 +37,6 @@ public class WeaponManager : MonoBehaviour {
 			if(Input.GetButtonDown("Weapon" + (i+1))){
 				if(equippedWeapons[i]){
 					nextWeapon = equippedWeapons [i];
-					//TryAttack ();
 				}
 			}
 		}
