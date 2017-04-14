@@ -38,7 +38,7 @@ public class PotionManager : MonoBehaviour {
 				UnequipPotion (GetIndexFromPotion(_potionC));
 			}
 		}
-		ItemManager.instance.AddItemToInventory (GetComponent<ItemController> ());
+		ItemManager.instance.AddItemToInventory (_potionC.GetComponent<ItemController> ());
 	}
 	
 	public void UsePotion(int _index){

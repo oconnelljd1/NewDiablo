@@ -46,30 +46,28 @@ public class WeaponManager : MonoBehaviour {
 		}
 	}
 
+	void OnDisable(){
+		currentWeapon = null;
+	}
+
 	public void AddWeapon(WeaponController _weapon){
 		weapons.Add (_weapon);
-		/*
-		for(int i = 0; i < equippedWeapons.Length; i++){
-			if(equippedWeapons[i] == null){
-				equippedWeapons [i] = _weapon;
-				break;
-			}	
-		}
-		*/
 	}
 
 	public void EquipWeapon(int _index){
 		equippedWeapons [_index] = null;
-		weaponImages [_index] = null;
+		weaponImages [_index - 1].sprite = null;
 		if (currentWeapon) {
 			for (int i = 1; i < equippedWeapons.Length; i++) {
 				if (equippedWeapons [i] == currentWeapon) {
 					equippedWeapons [i] = null;
+					weaponImages [i - 1].sprite = null;
 				}
 			}
 			equippedWeapons [_index] = currentWeapon;
-			weaponImages [_index].sprite = currentWeapon.gameObject.GetComponent<ItemController> ().GetSprite ();
+			weaponImages [_index - 1].sprite = currentWeapon.GetSprite ();
 		}
+		currentWeapon = null;
 	}
 
 	public void EquipPrimary(WeaponController _weaponC){

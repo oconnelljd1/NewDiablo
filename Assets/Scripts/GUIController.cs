@@ -20,9 +20,11 @@ public class GUIController : MonoBehaviour {
 	void Update () {
 		WeaponController[] equippedWeapons = WeaponManager.instance.GetEquippedWeapons();
 		for(int i = 0; i < equippedWeapons.Length; i++){
-			if(equippedWeapons[i] != null){
+			if (equippedWeapons [i] != null) {
 				//Debug.Log (weapons [i]);
-				weapons [i].sprite = equippedWeapons[i].GetSprite ();
+				weapons [i].sprite = equippedWeapons [i].GetSprite ();
+			} else {
+				weapons [i].sprite = null;
 			}
 		}
 		PotionController[] equippedPotions = PotionManager.instance.GetEquippedPotions ();
