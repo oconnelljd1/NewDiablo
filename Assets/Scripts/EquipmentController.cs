@@ -20,11 +20,13 @@ public class EquipmentController : MonoBehaviour {
 
 	[SerializeField]private bool twoHanded;
 
+	private Sprite mySprite;
+
 	private GameObject target;
 
 	// Use this for initialization
 	void Start () {
-	
+		mySprite = GetComponent<ItemController> ().GetSprite();
 	}
 	
 	// Update is called once per frame
@@ -119,6 +121,8 @@ public class EquipmentController : MonoBehaviour {
 		return iceArmorMultiplier;
 	}
 
-
+	public Sprite GetSprite(){
+		return mySprite;
+	}
 
 }

@@ -44,7 +44,6 @@ public class EquipmentManager : MonoBehaviour {
 			myHealth.ChangeStats (equipment[_index], -1);
 			ItemManager.instance.AddItemToInventory (equipment[_index].gameObject.GetComponent<ItemController>());
 			equipment [_index] = null;
-			equipmentImages[_index].sprite = null;
 			if(_index == 8){
 				WeaponManager.instance.UnequipPrimary ();
 			}
@@ -60,12 +59,17 @@ public class EquipmentManager : MonoBehaviour {
 				myHealth.ChangeStats (_equipC, 1);
 				ItemManager.instance.RemoveItem (_equipC.gameObject.GetComponent<ItemController>());
 				equipment [_index] = _equipC;
-				equipmentImages [_index].sprite = equipment [_index].gameObject.GetComponent<ItemController> ().GetSprite ();
-				if (_equipC.GetEquipmentType () == "weapon" && _index == 8) {
-					WeaponManager.instance.EquipPrimary (_equipC.gameObject.GetComponent<WeaponController>());
-				}
 			}
 		}
+	
+		for(int i = 0; i < equipment.Length; i++){
+			if (equipment [i]) {
+				equipmentImages [i].sprite = equipment [i].GetSprite ();
+			} else {
+				equipmentImages [i].sprite = null;
+			}
+		}
+
 	}
 
 	public EquipmentController GetEquipment(int _index){
