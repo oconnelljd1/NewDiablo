@@ -42,19 +42,19 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetMouseButtonDown(0)){
-			Debug.Log ("MouseClicked");
+			//Debug.Log ("MouseClicked");
 			if(!EventSystem.current.IsPointerOverGameObject()){
-				Debug.Log ("NotOverUI");
+				//Debug.Log ("NotOverUI");
 				RaycastHit hit;
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				Debug.DrawRay (ray.origin, ray.direction * Mathf.Infinity, Color.red);
 				if(Physics.Raycast(ray.origin, ray.direction, out hit, Mathf.Infinity, myLayerMask, QueryTriggerInteraction.Ignore)){
-					Debug.Log ("HitSomething");
+					//Debug.Log ("HitSomething");
 					path = new List<Vector3> ();
 					here = false;
 					targetObject = null;
 					targetPos = Vector3.zero;
-					Debug.Log ("hit " + hit.collider.gameObject.tag);
+					//Debug.Log ("hit " + hit.collider.gameObject.tag);
 					if (hit.collider.gameObject.tag == "Ground") {
 						targetPos = hit.point;
 					} else if (hit.collider.tag == "Enemy" || hit.collider.tag == "Item" || hit.collider.tag == "Chest") {
@@ -113,9 +113,9 @@ public class PlayerController : MonoBehaviour {
 					return;
 				}
 			} else if (targetObject.tag == "Chest"){
-				Debug.Log (Displacement.sqrMagnitude);
+				//Debug.Log (Displacement.sqrMagnitude);
 				if(Displacement.sqrMagnitude < 1.25){
-					Debug.Log ("FoundChest");
+					//Debug.Log ("FoundChest");
 					targetObject.GetComponent<ChestController> ().Open ();
 					here = true;
 					return;

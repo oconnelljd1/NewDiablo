@@ -6,7 +6,8 @@ public class GUIController : MonoBehaviour {
 
 	[SerializeField]private Image health, mana;
 	[SerializeField]private RectTransform highlighter;
-	[SerializeField]private Image[] weapons;
+	[SerializeField]private Image[] weapons, potions;
+	[SerializeField]private Text[] potionTexts;
 	private HealthController playerHealth;
 
 	// Use this for initialization
@@ -22,6 +23,19 @@ public class GUIController : MonoBehaviour {
 			if(equippedWeapons[i] != null){
 				//Debug.Log (weapons [i]);
 				weapons [i].sprite = equippedWeapons[i].GetSprite ();
+			}
+		}
+		PotionController[] equippedPotions = PotionManager.instance.GetEquippedPotions ();
+		for(int i = 0; i < potions.Length; i++){
+			if(equippedPotions[i] != null){
+				potions [i].sprite = equippedPotions [i].GetComponent<ItemController> ().GetSprite ();
+			}
+		}
+
+		for(int i = 0; i < potionTexts.Length; i++){
+			potionTexts[i].text = "x";
+			if(equippedPotions[i] != null){
+				potionTexts[i].text += "" + equippedPotions [i].GetComponent<ItemController> ().GetStackSize ();
 			}
 		}
 		highlighter.anchoredPosition = weapons [WeaponManager.instance.GetNextWeapon ()].GetComponent<RectTransform> ().anchoredPosition;

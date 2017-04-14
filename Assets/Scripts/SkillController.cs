@@ -13,7 +13,7 @@ public class SkillController : MonoBehaviour {
 	[SerializeField]private int[] upToStats;
 	private HealthController myHealth;
 
-	private bool isBought;
+	private bool isBought = false;
 
 	private string[] stats = new string[20] {"health", "healthMultiplier", "mana", "manaMultiplier", "damage", "damageMultiplier", "lightningDamage", "lightningDamageMultiplier", "fireDamage", "fireDamageMultiplier", "iceDamage", "iceDamageMultiplier", "armor", "armorMultiplier", "lightningArmor", "lightningArmorMultiplier", "fireArmor", "fireArmorMultiplier", "iceArmor", "iceArmorMultiplier"};
 
@@ -29,6 +29,7 @@ public class SkillController : MonoBehaviour {
 			isBought = true;
 			if(skill){
 				skill.SetActive(true);
+				WeaponManager.instance.AddWeapon (skill.GetComponent<WeaponController>());
 			}else if(skillToUp){
 				List<int> myStats= new List<int>();
 				for(int i = 0; i < stats.Length; i ++){
@@ -114,6 +115,9 @@ public class SkillController : MonoBehaviour {
 						}	
 					}
 				}//if c = certain number then crash game
+				if(myStats.Count == 0){
+					Debug.Log ("You spelt something wrong in: " + gameObject.name);
+				}
 				for(int i = 0; i < myStats.Count; i++){
 					switch(myStats[i]){
 					case 0:
@@ -185,8 +189,9 @@ public class SkillController : MonoBehaviour {
 			//myButton.Sprite = ;
 			myButton.interactable = false;
 			foreach (Button button in nextSkills) {
-				SkillController buttonSkill = button.gameObject.GetComponent<SkillController> ();
-				if (!buttonSkill.GetIsBought()) {
+				//SkillController buttonSkill = button.gameObject.GetComponent<SkillController> ();
+				Debug.Log(button);
+				if (!button.GetComponent<SkillController> ().GetIsBought()) {
 					button.interactable = true;
 				}
 			}

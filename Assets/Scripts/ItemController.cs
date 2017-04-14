@@ -8,7 +8,7 @@ public class ItemController : MonoBehaviour {
 	[SerializeField]private string itemType, questName;
 
 	private bool isWeapon, isEquipmenet, isStackable;
-	private int stackSize;
+	private int stackSize = 1;
 
 	// Use this for initialization
 	void Start () {

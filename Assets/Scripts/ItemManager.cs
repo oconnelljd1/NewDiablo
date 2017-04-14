@@ -31,6 +31,7 @@ public class ItemManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log (currentItem);
 		/* KEEP THIS, NEEDS TO BE MOVED TO PLAYER CONTROLLER
 		if(Input.GetMouseButtonDown(0)){
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -64,7 +65,6 @@ public class ItemManager : MonoBehaviour {
 				currentInt = _index;
 			}
 		//}
-		Debug.Log (currentItem);
 		myScrollInv.UpdateInventory ();
 	}
 
@@ -81,11 +81,24 @@ public class ItemManager : MonoBehaviour {
 	}
 
 	public void InteractWithPotions(int _index){
-		if (currentItem || currentItem.gameObject.GetComponent<PotionController>()){
+		if (!currentItem) {
+			PotionManager.instance.UnequipPotion (_index);
+		}
+		if(currentItem && PotionManager.instance.GetPotionFromIndex(_index)){
+			PotionManager.instance.UnequipPotion (_index);
+		}
+		if(currentItem && currentItem.GetComponent<PotionController>()){
+			PotionManager.instance.EquipPotion (_index, currentItem.GetComponent<PotionController>());
+		}
+		currentItem = null;
+		/*
+		if (currentItem && currentItem.gameObject.GetComponent<PotionController>()){
 			PotionManager.instance.EquipPotion (_index, currentItem.gameObject.GetComponent<PotionController>());
 		}else if(PotionManager.instance.GetPotionFromIndex(_index) && !currentItem){
 			PotionManager.instance.UnequipPotion (_index);
 		}
+		currentItem = null;
+		*/
 	}
 
 	public int GetInventoryCount(){
@@ -111,10 +124,12 @@ public class ItemManager : MonoBehaviour {
 			_itemC.gameObject.transform.GetChild (0).gameObject.SetActive (false);
 		}
 		QuestManager.instance.IncrementQuest (_itemC.GetQuestName ());
+		myScrollInv.UpdateInventory ();
 	}
 
 	public void RemoveItem(ItemController _itemC){
 		inventory.Remove (_itemC);
+		myScrollInv.UpdateInventory ();
 	}
 
 	public List<ItemController> GetInventory	(){

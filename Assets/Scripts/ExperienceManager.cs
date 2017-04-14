@@ -5,7 +5,7 @@ public class ExperienceManager : MonoBehaviour {
 
 	public static ExperienceManager instance;
 
-	private int experience, toNextLevel, skillPoints = 1;
+	private int experience, toNextLevel, skillPoints = 3;
 
 	void Awake(){
 		if(instance){

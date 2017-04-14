@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PotionManager : MonoBehaviour {
@@ -6,6 +7,7 @@ public class PotionManager : MonoBehaviour {
 	public static PotionManager instance;
 
 	private PotionController[] myPotions = new PotionController[3];
+	[SerializeField]private Image[] myImages;
 
 	void Awake(){
 		if (instance) {
@@ -49,11 +51,13 @@ public class PotionManager : MonoBehaviour {
 	public void EquipPotion(int _index, PotionController _potionC){
 		myPotions [_index] = _potionC;
 		ItemManager.instance.RemoveItem (_potionC.gameObject.GetComponent<ItemController>());
+		myImages [_index].sprite = myPotions [_index].GetComponent<ItemController> ().GetSprite ();
 	}
 
 	public void UnequipPotion(int _index){
-		ItemManager.instance.AddItemToInventory(GetComponent<ItemController>());
+		ItemManager.instance.AddItemToInventory(myPotions[_index].GetComponent<ItemController>());
 		myPotions [_index] = null;
+		myImages [_index].sprite = null;
 	}
 
 	public PotionController GetPotionFromIndex(int _index){
@@ -68,5 +72,9 @@ public class PotionManager : MonoBehaviour {
 		}
 		Debug.Log ("Can't find potion with GetIndexFromPotion");
 		return 0;
+	}
+
+	public PotionController[] GetEquippedPotions(){
+		return myPotions;
 	}
 }
