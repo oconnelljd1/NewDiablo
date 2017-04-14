@@ -35,6 +35,9 @@ public class WeaponController : MonoBehaviour {
 		myCollider = GetComponent<Collider> ();
 		Debug.Log (myCollider);
 		myCollider.enabled = true;
+		if(GetComponent<ItemController>()){
+			mySprite = GetComponent<ItemController> ().GetSprite();
+		}
 	}
 	
 	// Update is called once per frame
@@ -358,5 +361,9 @@ public class WeaponController : MonoBehaviour {
 
 	public int GetPierces(){
 		return pierces;
+	}
+
+	public Sprite GetSprite(){
+		return mySprite;
 	}
 }

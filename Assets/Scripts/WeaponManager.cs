@@ -8,7 +8,7 @@ public class WeaponManager : MonoBehaviour {
 	public static WeaponManager instance;
 
 	private WeaponController[] equippedWeapons = new WeaponController[7];
-	private List<WeaponController> weapons = new List<WeaponController>(){null, null, null, null, null, null, null, null, null, null};
+	private List<WeaponController> weapons = new List<WeaponController> ();//{null, null, null, null, null, null, null, null, null, null};
 	[SerializeField]private Image[] weaponImages;
 
 	private WeaponController lastWeapon = new WeaponController(), nextWeapon, currentWeapon;
@@ -75,7 +75,9 @@ public class WeaponManager : MonoBehaviour {
 	}
 
 	public void HoldWeapon(int _index){
-		currentWeapon = weapons [_index];
+		if(_index < weapons.Count){
+			currentWeapon = weapons [_index];
+		}
 	}
 
 
@@ -128,5 +130,8 @@ public class WeaponManager : MonoBehaviour {
 	public void CloseWindow(){
 		currentWeapon = null;
 	}
+	public List<WeaponController> GetAllWeapons(){
+		return weapons;
+	} 
 
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class ScrollabelInventory : MonoBehaviour {
 
 	[SerializeField]private GameObject slotPrefab, content;
-	private GameObject itemSlot;
+	//private GameObject itemSlot;
 	[SerializeField]private ToggleGroup myToggle;
 	[SerializeField]private int preLength, width;
 	[SerializeField]private bool isItem;
@@ -94,12 +94,23 @@ public class ScrollabelInventory : MonoBehaviour {
 	}
 
 	public void UpdateInventory(){
-		List<ItemController> myInventory = ItemManager.instance.GetInventory ();
-		for(int i = 0; i < slots.Count + preLength; i++){
-			if(i < myInventory.Count){
-				content.transform.GetChild (i).gameObject.GetComponent<Image> ().sprite = myInventory [i].GetSprite ();
-			} else {
-				content.transform.GetChild (i).gameObject.GetComponent<Image> ().sprite = null;
+		if (isItem) {
+			List<ItemController> myInventory = ItemManager.instance.GetInventory ();
+			for (int i = 0; i < slots.Count + preLength; i++) {
+				if (i < myInventory.Count) {
+					content.transform.GetChild (i).gameObject.GetComponent<Image> ().sprite = myInventory [i].GetSprite ();
+				} else {
+					content.transform.GetChild (i).gameObject.GetComponent<Image> ().sprite = null;
+				}
+			}
+		} else {
+			List<WeaponController> myWeapons = WeaponManager.instance.GetAllWeapons ();
+			for(int i = 0; i < slots.Count + preLength; i++){
+				if (i < myWeapons.Count) {
+					content.transform.GetChild (i).gameObject.GetComponent<Image> ().sprite = myWeapons [i].GetSprite ();
+				} else {
+					content.transform.GetChild (i).gameObject.GetComponent<Image> ().sprite = null;
+				}
 			}
 		}
 	}
