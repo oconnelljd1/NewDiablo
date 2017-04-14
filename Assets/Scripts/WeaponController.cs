@@ -32,9 +32,9 @@ public class WeaponController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		myCollider = GetComponent<Collider> ();
-		Debug.Log (myCollider);
-		myCollider.enabled = true;
+		if(!ranged && !support){
+			myCollider = GetComponent<Collider> ();
+		}
 		if(GetComponent<ItemController>()){
 			mySprite = GetComponent<ItemController> ().GetSprite();
 		}

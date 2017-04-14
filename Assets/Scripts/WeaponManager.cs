@@ -23,11 +23,11 @@ public class WeaponManager : MonoBehaviour {
 			instance = this;
 			Object.DontDestroyOnLoad (gameObject);
 		}
-		myHealthController = GetComponent<HealthController> ();
 	}
 
 	// Use this for initialization
 	void Start () {
+		myHealthController = GetComponent<HealthController> ();
 		
 	}
 	
