@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 01ad3e096402e9c45bbd66644db479ec
+timeCreated: 1492007099
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - floor: {fileID: 1000012766310852, guid: 230b08ba5fa5dcb449e338495fbb4ce7, type: 2}
+  - wall: {fileID: 1000011127706622, guid: 724429f6401226b4d9fde04405c339e6, type: 2}
+  - edge: {fileID: 1000013650761522, guid: 04966751f0c581d4e8922b518c68c99c, type: 2}
+  - parallel: {fileID: 1000013417891264, guid: 2f17f9f54aed0724b818267ffc464ba4, type: 2}
+  - perpendicular: {fileID: 1000012766310852, guid: 230b08ba5fa5dcb449e338495fbb4ce7,
+      type: 2}
+  - three: {fileID: 1000010683542244, guid: a2c482963beba0d4282c959e52b02eff, type: 2}
+  - surrounded: {fileID: 1000010417194804, guid: fbb59f1fa6bb23446b16dc0084ec2eb8,
+      type: 2}
+  - corner: {fileID: 1000010286033454, guid: 7e7830509515a0740b621917f5e7ec68, type: 2}
+  - tree: {instanceID: 0}
+  - chest: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
