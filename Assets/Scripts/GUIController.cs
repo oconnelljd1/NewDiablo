@@ -12,19 +12,22 @@ public class GUIController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerHealth = PlayerController.instance.gameObject.GetComponent<HealthController> ();
+		//health.fillAmount = 0.5f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		WeaponController[] equippedWeapons = WeaponManager.instance.GetEquippedWeapons();
-		for(int i = 0; i < 7; i++){
+		for(int i = 0; i < equippedWeapons.Length; i++){
 			if(equippedWeapons[i] != null){
-				weapons [i].sprite = equippedWeapons[i].gameObject.GetComponent<ItemController>().GetSprite ();
+				weapons [i].sprite = equippedWeapons[i].GetSprite ();
 			}
 		}
 		highlighter.anchoredPosition = weapons [WeaponManager.instance.GetNextWeapon ()].GetComponent<RectTransform> ().anchoredPosition;
 
-		health.fillAmount = playerHealth.GetCurrentHealth () / playerHealth.GetMaxHealth ();
-		mana.fillAmount = playerHealth.GetCurrentMana () / playerHealth.GetMaxMana ();
+		float currentHealth = playerHealth.GetCurrentHealth (), maxHealth = playerHealth.GetMaxHealth ();
+		health.fillAmount = currentHealth / maxHealth;
+		float currentMana = playerHealth.GetCurrentMana(), maxMana = playerHealth.GetMaxMana();
+		mana.fillAmount = currentMana / maxMana;
 	}
 }

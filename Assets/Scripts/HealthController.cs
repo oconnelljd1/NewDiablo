@@ -6,7 +6,7 @@ public class HealthController : MonoBehaviour {
 	[SerializeField]private int healthValue = 100, healthMultiplier = 100;
 	private float currentHealth, currentMana;
 	[SerializeField]private int manaValue = 100, manaMultiplier = 100;
-	[SerializeField]private int healthRegenValue, healthRegenMultiplier;
+	[SerializeField]private int healthRegenValue, healthRegenMultiplier = 100;
 	[SerializeField]private int manaRegenValue = 1, manaRegenMultiplier = 100;
 
 	[SerializeField] private int damageValue, damageMultiplier = 100;
