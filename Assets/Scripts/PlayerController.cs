@@ -146,17 +146,14 @@ public class PlayerController : MonoBehaviour {
 
 	public void SetNextDoor(int NextDoor){
 		nextDoor = NextDoor;
+		here = true;
 	}
 
 	public void SetPathfinder(MyPathfinding _pathfinder){
 		pathfinder = _pathfinder;
 	}
 
-	public int GetDamage(){
-		return 5;
-	}
-
-	public void Damage(){
-		
+	public GameObject GetCurrentTarget(){
+		return targetObject;
 	}
 }

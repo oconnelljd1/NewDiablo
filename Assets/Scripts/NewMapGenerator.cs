@@ -317,7 +317,9 @@ public class NewMapGenerator : MonoBehaviour {
 		}
 
 		for (int i = 0; i < doors.Length; i++) {
-			doors [i].GetComponent<DoorController> ().CheckDoor ();
+			if(doors[i]){
+				doors [i].GetComponent<DoorController> ().CheckDoor ();
+			}
 		}
 	}
 

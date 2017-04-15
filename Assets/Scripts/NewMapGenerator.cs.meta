@@ -1,11 +1,11 @@
 fileFormatVersion: 2
 guid: 01ad3e096402e9c45bbd66644db479ec
-timeCreated: 1492007099
-licenseType: Pro
+timeCreated: 1492297936
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - floor: {fileID: 1000012766310852, guid: 230b08ba5fa5dcb449e338495fbb4ce7, type: 2}
+  - floor: {fileID: 1000012782667274, guid: f388463e528a0a94796b93aac8bf857b, type: 2}
   - wall: {fileID: 1000011127706622, guid: 724429f6401226b4d9fde04405c339e6, type: 2}
   - edge: {fileID: 1000013650761522, guid: 04966751f0c581d4e8922b518c68c99c, type: 2}
   - parallel: {fileID: 1000013417891264, guid: 2f17f9f54aed0724b818267ffc464ba4, type: 2}

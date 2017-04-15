@@ -9,7 +9,6 @@ public class PackEnemyAI : MonoBehaviour {
 
 	private bool aggro = false;
 	private GameObject target = null;
-	[SerializeField]private float reach;
 	[SerializeField]private float moveSpeed;
 	[SerializeField]private WeaponController[] weapons;
 	[SerializeField]private SphereCollider myRadius;

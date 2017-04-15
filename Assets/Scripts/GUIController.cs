@@ -4,7 +4,7 @@ using System.Collections;
 
 public class GUIController : MonoBehaviour {
 
-	[SerializeField]private Image health, mana;
+	[SerializeField]private Image health, mana, enemyHealth;
 	[SerializeField]private RectTransform highlighter;
 	[SerializeField]private Image[] weapons, potions;
 	[SerializeField]private Text[] potionTexts;
@@ -48,5 +48,14 @@ public class GUIController : MonoBehaviour {
 		health.fillAmount = currentHealth / maxHealth;
 		float currentMana = playerHealth.GetCurrentMana(), maxMana = playerHealth.GetMaxMana();
 		mana.fillAmount = currentMana / maxMana;
+		GameObject currentTarget = PlayerController.instance.GetCurrentTarget ();
+		if (currentTarget && currentTarget.CompareTag ("Enemy")) {
+			enemyHealth.gameObject.SetActive (true);
+			float currentEnemyHealth = currentTarget.GetComponent<HealthController> ().GetCurrentHealth ();
+			float maxEnemyHealth = currentTarget.GetComponent<HealthController> ().GetMaxHealth ();
+			enemyHealth.fillAmount = currentEnemyHealth / maxEnemyHealth;
+		} else {
+			enemyHealth.gameObject.SetActive (false);
+		}
 	}
 }

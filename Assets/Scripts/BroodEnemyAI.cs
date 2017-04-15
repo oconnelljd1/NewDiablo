@@ -5,7 +5,6 @@ public class BroodEnemyAI : MonoBehaviour {
 
 	private bool aggro;
 	private GameObject target;
-	[SerializeField]private float reach = 1;
 	[SerializeField]private float moveSpeed = 1;
 	[SerializeField]private WeaponController[] weapons;
 	private float attackDelay;
