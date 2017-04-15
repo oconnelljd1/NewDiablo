@@ -113,9 +113,9 @@ public class PlayerController : MonoBehaviour {
 					return;
 				}
 			} else if (targetObject.CompareTag("Chest")){
-				//Debug.Log (Displacement.sqrMagnitude);
+				Debug.Log (Displacement.sqrMagnitude);
 				if(Displacement.sqrMagnitude < 1.25){
-					//Debug.Log ("FoundChest");
+					Debug.Log ("FoundChest");
 					targetObject.GetComponent<ChestController> ().Open ();
 					here = true;
 					return;

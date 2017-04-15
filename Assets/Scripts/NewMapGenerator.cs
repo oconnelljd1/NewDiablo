@@ -38,12 +38,17 @@ public class NewMapGenerator : MonoBehaviour {
 	private void GenerateMap(){
 		myPathfinding = GetComponent<MyPathfinding>();
 		map = new int[width, height];
-		RandomFillMap ();
-		while (changes > 0) {
-			changes = 0;
-			SmoothMap ();
+		bool good = false;
+		while(!good){
+			RandomFillMap ();
+			while (changes > 0) {
+				changes = 0;
+				SmoothMap ();
+			}
+			changes = 1;
+
+			good = CheckforEmpties ();
 		}
-		changes = 1;
 
 		CheckWalls ();
 		PlaceEnemies ();
@@ -92,6 +97,17 @@ public class NewMapGenerator : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	private bool CheckforEmpties(){
+		for(int i = 0;i < width; i++){
+			for(int o = 0; o < height; o ++){
+				if(map[i,o] == 0){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	int GetSurroundingWallCount(int gridX, int gridY){
@@ -168,7 +184,7 @@ public class NewMapGenerator : MonoBehaviour {
 			}
 			break;
 		case 0111:
-			Object.Instantiate (edge, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 270, 0));
+			Object.Instantiate (edge, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 180, 0));
 			break;
 		case 1000:
 			Object.Instantiate (three, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 0, 0));
@@ -186,7 +202,7 @@ public class NewMapGenerator : MonoBehaviour {
 			Object.Instantiate (parallel, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 0, 0));
 			break;
 		case 1011:
-			Object.Instantiate (edge, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 0, 0));
+			Object.Instantiate (edge, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 270, 0));
 			break;
 		case 1100:
 			if (i + 1 < width && o + 1  < height) {
@@ -198,10 +214,10 @@ public class NewMapGenerator : MonoBehaviour {
 			}
 			break;
 		case 1101:
-			Object.Instantiate (edge, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 90, 0));
+			Object.Instantiate (edge, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 0, 0));
 			break;
 		case 1110:
-			Object.Instantiate (edge, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 180, 0));
+			Object.Instantiate (edge, new Vector3 (i * scale, 0, o * scale), Quaternion.Euler (0, 90, 0));
 			break;
 		case 1111:
 			bool stop = false;
@@ -279,38 +295,38 @@ public class NewMapGenerator : MonoBehaviour {
 		}
 		int xDif = (highX - lowX) / 4;
 		int yDif = (highY - lowY) / 4;
-		if(doors[0] != null){
+		if(doors[1] != null){
 			int random = Random.Range (lowY + yDif, highY - yDif);
 			for(int i = 0; i < width; i++){
 				if(map[i,random]==0){
-					doors[0].transform.position = new Vector3 (i * scale,0, random*scale);
+					doors[1].transform.position = new Vector3 (i * scale,0, random*scale);
 					break;
 				}
 			}
 		}
-		if(doors[1] != null){
+		if(doors[2] != null){
 			int random = Random.Range (lowX + xDif, highX - xDif);
 			for(int i = 0; i < height; i++){
 				if(map[random,i]==0){
-					doors[1].transform.position = new Vector3  (random * scale,0, i*scale);
-					break;
-				}
-			}
-		}
-		if(doors[2]!= null){
-			int random = Random.Range (lowY + yDif, highY - yDif);
-			for(int i = width - 1; i >= 0; i--){
-				if(map[i,random]==0){
-					doors[2].transform.position = new Vector3  (i * scale,0, random*scale);
+					doors[2].transform.position = new Vector3  (random * scale,0, i*scale);
 					break;
 				}
 			}
 		}
 		if(doors[3]!= null){
+			int random = Random.Range (lowY + yDif, highY - yDif);
+			for(int i = width - 1; i >= 0; i--){
+				if(map[i,random]==0){
+					doors[3].transform.position = new Vector3  (i * scale,0, random*scale);
+					break;
+				}
+			}
+		}
+		if(doors[0]!= null){
 			int random = Random.Range (lowX + xDif, highX - xDif);
 			for(int i = height - 1; i >= 0; i--){
 				if(map[random,i]==0){
-					doors[3].transform.position = new Vector3  (random * scale,0, i*scale);
+					doors[0].transform.position = new Vector3  (random * scale,0, i*scale);
 					break;
 				}
 			}
