@@ -69,7 +69,9 @@ public class EquipmentManager : MonoBehaviour {
 				equipmentImages [i].sprite = null;
 			}
 		}
-		WeaponManager.instance.EquipPrimary (equipment[8].GetComponent<WeaponController>());
+		if(equipment[8]){
+			WeaponManager.instance.EquipPrimary (equipment[8].GetComponent<WeaponController>());
+		}
 
 	}
 

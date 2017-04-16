@@ -38,8 +38,8 @@ public class NewMapGenerator : MonoBehaviour {
 	private void GenerateMap(){
 		myPathfinding = GetComponent<MyPathfinding>();
 		map = new int[width, height];
-		bool good = false;
-		while(!good){
+		//bool good = false;
+		//while(!good){
 			RandomFillMap ();
 			while (changes > 0) {
 				changes = 0;
@@ -47,8 +47,8 @@ public class NewMapGenerator : MonoBehaviour {
 			}
 			changes = 1;
 
-			good = CheckforEmpties ();
-		}
+			CheckforEmpties ();
+		//}
 
 		CheckWalls ();
 		PlaceEnemies ();
@@ -98,8 +98,9 @@ public class NewMapGenerator : MonoBehaviour {
 			}
 		}
 	}
-
-	private bool CheckforEmpties(){
+	//--------------------------------------------------------------------------
+	private void CheckforEmpties(){
+		/*
 		for(int i = 0;i < width; i++){
 			for(int o = 0; o < height; o ++){
 				if(map[i,o] == 0){
@@ -108,8 +109,14 @@ public class NewMapGenerator : MonoBehaviour {
 			}
 		}
 		return false;
+		*/
+		for (int i = 0; i < width; i++) {
+			for (int o = 0; o < height; o++) {
+					Debug.Log (map [i, o]);
+			}
+		}
 	}
-
+	//---------------------------------------------------------------------------
 	int GetSurroundingWallCount(int gridX, int gridY){
 		int WallCount = 0;
 		for(int i = gridX - 1; i <= gridX +1; i++){
@@ -127,6 +134,7 @@ public class NewMapGenerator : MonoBehaviour {
 	}
 
 	void CheckWalls(){
+		Debug.Log ("trying to make walls");
 		for (int i = 0; i < width; i++) {
 			for (int o = 0; o < height; o++) {
 				if (map [i, o] == 1) {
@@ -295,16 +303,26 @@ public class NewMapGenerator : MonoBehaviour {
 		}
 		int xDif = (highX - lowX) / 4;
 		int yDif = (highY - lowY) / 4;
-		if(doors[1] != null){
-			int random = Random.Range (lowY + yDif, highY - yDif);
-			for(int i = 0; i < width; i++){
-				if(map[i,random]==0){
-					doors[1].transform.position = new Vector3 (i * scale,0, random*scale);
+
+		if(doors[0] != null){
+			int random = Random.Range (lowX + xDif, highX - xDif);
+			for(int i = height - 1; i >= 0; i--){
+				if(map[random,i]==0){
+					doors[0].transform.position = new Vector3  (random * scale,0, i*scale);
 					break;
 				}
 			}
 		}
-		if(doors[2] != null){
+		if(doors[1] != null){
+			int random = Random.Range (lowY + yDif, highY - yDif);
+			for(int i = width - 1; i >= 0; i--){
+				if(map[i,random]==0){
+					doors[1].transform.position = new Vector3  (i * scale,0, random*scale);
+					break;
+				}
+			}
+		}
+		if(doors[2]!= null){
 			int random = Random.Range (lowX + xDif, highX - xDif);
 			for(int i = 0; i < height; i++){
 				if(map[random,i]==0){
@@ -315,18 +333,9 @@ public class NewMapGenerator : MonoBehaviour {
 		}
 		if(doors[3]!= null){
 			int random = Random.Range (lowY + yDif, highY - yDif);
-			for(int i = width - 1; i >= 0; i--){
+			for(int i = 0; i < width; i++){
 				if(map[i,random]==0){
-					doors[3].transform.position = new Vector3  (i * scale,0, random*scale);
-					break;
-				}
-			}
-		}
-		if(doors[0]!= null){
-			int random = Random.Range (lowX + xDif, highX - xDif);
-			for(int i = height - 1; i >= 0; i--){
-				if(map[random,i]==0){
-					doors[0].transform.position = new Vector3  (random * scale,0, i*scale);
+					doors[3].transform.position = new Vector3 (i * scale,0, random*scale);
 					break;
 				}
 			}
